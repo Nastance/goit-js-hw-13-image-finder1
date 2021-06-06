@@ -11,25 +11,26 @@ const per_page = 12;
 
 export default class ApiService {
     constructor() {
-        this.searchWord = '';
+        this.searchQuery = '';
         this.page = 1;
     }
 
     fetchImages() {
-        const url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${searchWord}&page=${page}&per_page=${per_page}&key=${API_KEY}`;
+        const url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${searchQuery}&page=${page}&per_page=${per_page}&key=${API_KEY}`;
        
         return fetch(url, options)
             .then(response => {
                 console.log(response);
                 if (response.ok) {
                     return response.json();
+                    console.log(response.json());
                 }
                 throw new Error('Fetching error');
             })
-            .then(({ images }) => {
-                console.log(images);
+            .then(({ elements }) => {
+                console.log(elements);
                 this.incrementPage();
-                return images;
+                return elements;
             });
     }
 
@@ -41,11 +42,11 @@ export default class ApiService {
         this.page = 1;
     }
 
-    get word() {
-        return this.searchWord;
+    get query() {
+        return this.searchQuery;
     }
 
-    set word(newhWord) {
-        this.searchWord = this.newhWord;
+    set query(newhQuery) {
+        this.searchQuery = this.newhQuery;
     }
 }

@@ -17,9 +17,9 @@ loadMoreBtn.refs.button.addEventListener('click', fetchImages);
 function onSearch(event) {
     event.preventDefault();
 
-    apiService.word = event.currentTarget.elements.word.value;
+    apiService.query = event.currentTarget.elements.query.value;
 
-    if (apiService.word === '') {
+    if (apiService.query === '') {
         return alert('Write your search');
     }
 
